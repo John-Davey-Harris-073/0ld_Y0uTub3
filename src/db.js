@@ -115,7 +115,8 @@ async function init() {
 }
 
 function uploadDir() {
-  return process.env.UPLOAD_DIR || path.join(__dirname, '..', 'data');
+  // Glitch: постоянное хранилище только в .data. Локально — тоже .data.
+  return process.env.UPLOAD_DIR || path.join(__dirname, '..', '.data');
 }
 
 function translate(sql) {
