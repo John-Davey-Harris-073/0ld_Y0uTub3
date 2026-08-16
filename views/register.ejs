@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<div class="form-box form-box-narrow">
+  <h1 class="form-title">Create Account</h1>
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+  <form action="/register" method="post">
+    <label class="form-label">Username</label>
+    <input type="text" name="username" class="form-input" maxlength="20" required>
+    <label class="form-label">Password</label>
+    <input type="password" name="password" class="form-input" required>
+    <label class="form-label">Confirm Password</label>
+    <input type="password" name="confirm" class="form-input" required>
+    <label class="form-label">Channel Description (optional)</label>
+    <textarea name="description" class="form-input" rows="3" maxlength="500"></textarea>
+    <button type="submit" class="blue-btn">Create Account</button>
+  </form>
+  <p class="form-note">Already have an account? <a href="/login">Sign in</a></p>
+</div>
+<%- include('partials/footer') %>

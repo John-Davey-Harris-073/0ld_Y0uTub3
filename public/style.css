@@ -1,0 +1,481 @@
+/* ============================================================
+   0ld_YouTube — ретро-дизайн в духе YouTube 2008-2012
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #333;
+  background: #eaeaea;
+}
+
+a { color: #167ac6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Красная шапка (2012) ---------- */
+#masthead {
+  background: linear-gradient(#d01012, #a31217);
+  border-bottom: 2px solid #7f0e12;
+  padding: 8px 0;
+}
+
+.masthead-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #fff;
+  letter-spacing: -1px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .35);
+  white-space: nowrap;
+}
+.logo:hover { text-decoration: none; color: #fff; }
+
+.search-form { display: flex; flex: 1; max-width: 480px; }
+.search-form input {
+  flex: 1;
+  height: 30px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 3px 0 0 3px;
+  font-size: 14px;
+  outline: none;
+}
+.search-form button {
+  height: 30px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  background: #fff;
+  color: #444;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+}
+.search-form button:hover { background: #f0f0f0; }
+
+.masthead-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.masthead-link { color: #fff; font-size: 13px; font-weight: bold; }
+.masthead-link:hover { color: #fff; text-decoration: underline; }
+
+.upload-btn {
+  background: #fff;
+  color: #c01c1f;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 3px;
+}
+.upload-btn:hover { background: #ffecec; text-decoration: none; }
+
+.signin-btn {
+  background: #fff;
+  color: #444;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 3px;
+}
+.signin-btn:hover { background: #f0f0f0; text-decoration: none; }
+
+/* ---------- Каркас страницы: левый гайд + контент ---------- */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.page-noside { padding: 0; }
+
+#guide {
+  width: 210px;
+  background: #fff;
+  border: 1px solid #d3d3d3;
+  border-top: none;
+  margin-top: 10px;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+.guide-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #999;
+  padding: 4px 14px 8px;
+  text-transform: uppercase;
+}
+.guide-link {
+  display: block;
+  padding: 7px 14px;
+  color: #167ac6;
+  font-size: 13px;
+}
+.guide-link:hover { background: #ededed; text-decoration: none; }
+
+.content {
+  background: #fff;
+  border: 1px solid #d3d3d3;
+  border-top: none;
+  min-height: 80vh;
+  padding: 18px;
+  flex: 1;
+  margin-top: 10px;
+}
+
+/* ---------- Заголовки секций ---------- */
+.section-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+
+.empty-note { color: #888; margin: 10px 0; }
+
+/* ---------- Главная ---------- */
+.home-layout { display: flex; gap: 22px; align-items: flex-start; }
+.home-main { flex: 1; min-width: 0; }
+
+.video-grid { display: flex; flex-wrap: wrap; margin: 0 -12px -16px 0; }
+
+.video-item {
+  width: 160px;
+  margin: 0 12px 18px 0;
+}
+.video-item img {
+  display: block;
+  width: 160px;
+  height: 120px;
+  border: 1px solid #000;
+  background: #000;
+}
+.video-item-title a {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #167ac6;
+  line-height: 1.25;
+  max-height: 34px;
+  overflow: hidden;
+  margin-top: 3px;
+}
+.video-item-chan a { font-size: 12px; color: #167ac6; }
+.video-item-meta { font-size: 11px; color: #999; }
+
+.more-link { font-size: 13px; margin-top: 4px; }
+
+.home-side { width: 230px; flex-shrink: 0; }
+.popular-row { display: flex; gap: 8px; padding: 4px 0; align-items: flex-start; }
+.rank {
+  font-size: 18px;
+  font-weight: bold;
+  color: #aaa;
+  min-width: 20px;
+  text-align: center;
+}
+.popular-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #167ac6;
+  line-height: 1.25;
+}
+.popular-info .video-item-chan a { font-size: 11px; }
+
+/* ---------- Страница видео ---------- */
+.watch-layout { display: flex; gap: 20px; align-items: flex-start; }
+.watch-main { flex: 1; min-width: 0; max-width: 720px; }
+
+.player {
+  background: #000;
+  border: 1px solid #666;
+  margin-bottom: 10px;
+}
+.player video { display: block; width: 100%; max-height: 480px; background: #000; }
+
+.watch-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.watch-meta { font-size: 12px; color: #888; margin-bottom: 10px; }
+.watch-meta .views { color: #666; font-weight: bold; }
+.watch-meta .dot { margin: 0 5px; }
+.watch-meta .category { color: #167ac6; }
+
+.rating-row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.rating-btn {
+  background: linear-gradient(#f7f7f7, #e7e7e7);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+.rating-btn:hover { background: linear-gradient(#fff, #ececec); }
+.rating-btn.active {
+  background: linear-gradient(#e5373b, #c01c1f);
+  border-color: #a3141b;
+  color: #fff;
+}
+.rating-hint { font-size: 12px; color: #888; }
+
+.description-box {
+  border: 1px solid #d9d9d9;
+  background: #f7f7f7;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #555;
+}
+.description-author { font-weight: bold; margin-bottom: 4px; }
+.description-author a { font-size: 13px; }
+.about-joined { color: #888; margin-top: 6px; }
+
+.comments { margin-top: 8px; }
+.comment-form { margin-bottom: 14px; }
+.comment-form textarea {
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  resize: vertical;
+}
+.comment-form button {
+  margin-top: 6px;
+  background: linear-gradient(#e5373b, #c01c1f);
+  border: 1px solid #a3141b;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 16px;
+  cursor: pointer;
+}
+.comment-form button:hover { background: linear-gradient(#ef5053, #cf2a2e); }
+
+.comment {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ececec;
+}
+.avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(#e6e6e6, #cfcfcf);
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #888;
+  flex-shrink: 0;
+}
+.avatar-lg { width: 64px; height: 64px; font-size: 28px; }
+.comment-body { flex: 1; }
+.comment-head { margin-bottom: 2px; }
+.comment-user { font-size: 13px; font-weight: bold; color: #167ac6; }
+.comment-date { font-size: 11px; color: #999; margin-left: 8px; }
+.comment-text { font-size: 13px; color: #333; word-wrap: break-word; }
+
+.watch-side { width: 300px; flex-shrink: 0; }
+.side-box {
+  border: 1px solid #d3d3d3;
+  background: #fafafa;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+.side-box-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+.side-box-title a { font-size: 13px; }
+
+.red-btn {
+  display: inline-block;
+  background: linear-gradient(#e5373b, #c01c1f);
+  border: 1px solid #a3141b;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.red-btn:hover { background: linear-gradient(#ef5053, #cf2a2e); text-decoration: none; color: #fff; }
+
+.side-video { display: flex; gap: 8px; padding: 6px 0; }
+.side-video img {
+  width: 120px;
+  height: 90px;
+  border: 1px solid #000;
+  background: #000;
+  flex-shrink: 0;
+}
+.side-video-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #167ac6;
+  line-height: 1.25;
+  display: block;
+}
+.side-video-meta { font-size: 11px; color: #999; }
+
+/* ---------- Каналы ---------- */
+.channel-header {
+  border: 1px solid #d3d3d3;
+  background: #fafafa;
+  padding: 14px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.channel-header-info { flex: 1; min-width: 0; }
+.channel-name { font-size: 24px; font-weight: bold; color: #333; }
+.channel-stats { font-size: 12px; color: #888; margin-top: 2px; }
+.channel-desc { font-size: 13px; color: #555; margin-top: 6px; }
+.channel-self { color: #888; font-size: 13px; }
+
+.sub-btn {
+  background: linear-gradient(#e5373b, #c01c1f);
+  border: 1px solid #a3141b;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+.sub-btn:hover { background: linear-gradient(#ef5053, #cf2a2e); text-decoration: none; color: #fff; }
+.sub-btn.subscribed { background: linear-gradient(#f7f7f7, #e7e7e7); border-color: #ccc; color: #333; }
+
+.channel-row { display: flex; gap: 10px; align-items: center; padding: 8px 0; }
+.channel-row-name { font-size: 15px; font-weight: bold; color: #167ac6; }
+.channel-row-meta { font-size: 12px; color: #888; }
+
+/* ---------- Поиск / список видео ---------- */
+.search-row { display: flex; gap: 12px; padding: 10px 0; }
+.search-row img {
+  width: 160px;
+  height: 120px;
+  border: 1px solid #000;
+  background: #000;
+  flex-shrink: 0;
+}
+.search-title { font-size: 15px; font-weight: bold; color: #167ac6; }
+.search-sub { font-size: 12px; margin: 3px 0; }
+.search-sub a { color: #167ac6; }
+.gray { color: #999; }
+.search-snippet { font-size: 12px; color: #666; }
+
+.sort-bar { font-size: 13px; color: #888; margin-bottom: 10px; }
+.sort-bar a { margin: 0 6px; }
+.sort-bar .sort-active { font-weight: bold; color: #333; }
+
+.pagination { margin-top: 14px; font-size: 13px; }
+.pagination a { margin: 0 6px; }
+.page-num { color: #888; }
+
+/* ---------- Формы (вход / регистрация / загрузка) ---------- */
+.form-box {
+  border: 1px solid #d3d3d3;
+  background: #fafafa;
+  padding: 20px 24px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.form-box-narrow { max-width: 420px; }
+.form-title { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 4px; }
+.form-note { font-size: 12px; color: #888; margin: 8px 0; }
+.form-error {
+  background: #ffecec;
+  border: 1px solid #e5a0a0;
+  color: #b00;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  margin: 10px 0;
+}
+.form-label { display: block; font-size: 13px; font-weight: bold; color: #444; margin: 12px 0 4px; }
+.form-label .req { color: #c01c1f; }
+.form-input {
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 7px 8px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+.form-input:focus { outline: none; border-color: #167ac6; }
+.form-box .red-btn, .form-box .blue-btn { margin-top: 14px; }
+
+.blue-btn {
+  display: inline-block;
+  background: linear-gradient(#4d90fe, #4787ed);
+  border: 1px solid #3079ed;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.blue-btn:hover { background: linear-gradient(#5d9cff, #5290f0); color: #fff; text-decoration: none; }
+
+/* ---------- Ошибки ---------- */
+.error-box { text-align: center; padding: 40px 0; }
+.error-box h1 { font-size: 22px; color: #c01c1f; margin-bottom: 8px; }
+.error-box p { font-size: 14px; color: #666; margin: 4px 0; }
+
+/* ---------- Подвал ---------- */
+#footer {
+  max-width: 1200px;
+  margin: 20px auto 30px;
+  padding: 0 12px;
+  color: #999;
+  font-size: 12px;
+}
+#footer a { color: #167ac6; }
+.footer-note { margin-left: 14px; color: #aaa; }
+
+/* ---------- Адаптивность для телефонов ---------- */
+@media (max-width: 900px) {
+  .home-layout, .watch-layout { flex-direction: column; }
+  .home-side, .watch-side { width: 100%; }
+  .masthead-inner { flex-wrap: wrap; }
+  .search-form { order: 3; flex-basis: 100%; max-width: none; }
+  #guide { width: 100%; }
+  .page { flex-direction: column; }
+  #guide .guide-link { display: inline-block; padding: 6px 10px; }
+  .masthead-link, .upload-btn, .signin-btn { font-size: 12px; }
+}

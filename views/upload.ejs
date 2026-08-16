@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<div class="form-box">
+  <h1 class="form-title">Upload Video</h1>
+  <p class="form-note">Video files up to <%= maxMB %> MB. Supported: mp4, webm, mkv, avi, mov, m4v, flv, 3gp.</p>
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <label class="form-label">Title <span class="req">*</span></label>
+    <input type="text" name="title" class="form-input" maxlength="100" required>
+
+    <label class="form-label">Description</label>
+    <textarea name="description" class="form-input" rows="5" maxlength="2000"></textarea>
+
+    <label class="form-label">Tags (comma separated)</label>
+    <input type="text" name="tags" class="form-input" maxlength="200">
+
+    <label class="form-label">Category</label>
+    <select name="category" class="form-input">
+      <% categories.forEach(function (cat) { %>
+        <option value="<%= cat %>"><%= cat %></option>
+      <% }) %>
+    </select>
+
+    <label class="form-label">Video File</label>
+    <input type="file" name="video" class="form-input" accept="video/*" required>
+
+    <button type="submit" class="red-btn">Upload Video</button>
+  </form>
+</div>
+<%- include('partials/footer') %>

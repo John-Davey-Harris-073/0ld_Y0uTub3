@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof pageTitle !== 'undefined' && pageTitle !== 'YouTube' ? pageTitle + ' - YouTube' : 'YouTube' %></title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header id="masthead">
+  <div class="masthead-inner">
+    <a href="/" class="logo">YouTube</a>
+    <form action="/results" method="get" class="search-form">
+      <input type="text" name="search_query" value="<%= typeof query !== 'undefined' ? query : '' %>" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+    <div class="masthead-right">
+      <% if (user) { %>
+        <a href="/upload" class="upload-btn">Upload</a>
+        <a href="/channel/<%= user.username %>" class="masthead-link"><%= user.username %></a>
+        <a href="/logout" class="masthead-link">Sign&nbsp;out</a>
+      <% } else { %>
+        <a href="/register" class="masthead-link">Create&nbsp;account</a>
+        <a href="/login" class="signin-btn">Sign&nbsp;In</a>
+      <% } %>
+    </div>
+  </div>
+</header>
+<% if (typeof showGuide !== 'undefined' && showGuide) { %>
+<div class="page">
+  <nav id="guide">
+    <div class="guide-title">Guide</div>
+    <a href="/" class="guide-link">Home</a>
+    <a href="/videos" class="guide-link">Videos</a>
+    <a href="/channels" class="guide-link">Channels</a>
+    <% if (user) { %>
+      <a href="/subscriptions" class="guide-link">Subscriptions</a>
+      <a href="/channel/<%= user.username %>" class="guide-link">My Channel</a>
+    <% } %>
+  </nav>
+  <main class="content">
+<% } else { %>
+<div class="page page-noside">
+  <main class="content">
+<% } %>

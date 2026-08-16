@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+<div class="channel-header">
+  <div class="avatar avatar-lg"><%= channel.username.charAt(0).toUpperCase() %></div>
+  <div class="channel-header-info">
+    <h1 class="channel-name"><%= channel.username %></h1>
+    <div class="channel-stats">
+      <%= fmtViews(subCount) %> subscriber<%= subCount === 1 ? '' : 's' %> &middot; Joined <%= fmtDate(channel.joined_at) %>
+    </div>
+    <% if (channel.description) { %>
+      <p class="channel-desc"><%= channel.description %></p>
+    <% } %>
+  </div>
+  <div class="channel-header-action">
+    <% if (user && user.id === channel.id) { %>
+      <span class="channel-self">This is your channel</span>
+    <% } else if (user) { %>
+      <form action="/channel/<%= channel.username %>/subscribe" method="post">
+        <input type="hidden" name="action" value="<%= isSubscribed ? 'unsubscribe' : 'subscribe' %>">
+        <button type="submit" class="sub-btn <%= isSubscribed ? 'subscribed' : '' %>">
+          <%= isSubscribed ? 'Unsubscribe' : 'Subscribe' %>
+        </button>
+      </form>
+    <% } else { %>
+      <a href="/login?next=/channel/<%= channel.username %>" class="sub-btn">Subscribe</a>
+    <% } %>
+  </div>
+</div>
+
+<h2 class="section-title">Videos</h2>
+<% if (videos.length === 0) { %>
+  <p class="empty-note"><%= channel.username %> has no videos yet.</p>
+<% } else { %>
+  <div class="video-grid">
+    <% videos.forEach(function (v) { %>
+      <%- include('partials/videoitem', { v: v }) %>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (channel.description || true) { %>
+  <h2 class="section-title">About</h2>
+  <div class="description-box">
+    <p><%= channel.description ? channel.description : 'This user has not written a description yet.' %></p>
+    <p class="about-joined">Joined YouTube on <%= fmtDate(channel.joined_at) %></p>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

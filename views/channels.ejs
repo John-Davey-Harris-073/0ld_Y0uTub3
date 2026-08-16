@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<h2 class="section-title">Channels</h2>
+<% if (channels.length === 0) { %>
+  <p class="empty-note">No channels yet. <a href="/register">Create an account</a> to start your channel!</p>
+<% } %>
+<% channels.forEach(function (c) { %>
+  <div class="channel-row">
+    <div class="avatar"><%= c.username.charAt(0).toUpperCase() %></div>
+    <div class="channel-row-info">
+      <a href="/channel/<%= c.username %>" class="channel-row-name"><%= c.username %></a>
+      <div class="channel-row-meta">
+        <%= fmtViews(c.sub_count) %> subscriber<%= c.sub_count === 1 ? '' : 's' %> &middot;
+        <%= fmtViews(c.video_count) %> video<%= c.video_count === 1 ? '' : 's' %> &middot;
+        Joined <%= fmtDate(c.joined_at) %>
+      </div>
+    </div>
+  </div>
+<% }) %>
+<%- include('partials/footer') %>

@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<h2 class="section-title">Subscriptions</h2>
+<% if (videos.length === 0) { %>
+  <p class="empty-note">
+    You haven't subscribed to any channels yet (or they have no videos).
+    Browse <a href="/channels">channels</a> and hit "Subscribe"!
+  </p>
+<% } else { %>
+  <div class="video-grid">
+    <% videos.forEach(function (v) { %>
+      <%- include('partials/videoitem', { v: v }) %>
+    <% }) %>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

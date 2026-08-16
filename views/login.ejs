@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<div class="form-box form-box-narrow">
+  <h1 class="form-title">Sign In to YouTube</h1>
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+  <form action="/login" method="post">
+    <input type="hidden" name="next" value="<%= typeof next !== 'undefined' ? next : '' %>">
+    <label class="form-label">Username</label>
+    <input type="text" name="username" class="form-input" required>
+    <label class="form-label">Password</label>
+    <input type="password" name="password" class="form-input" required>
+    <button type="submit" class="blue-btn">Sign In</button>
+  </form>
+  <p class="form-note">New here? <a href="/register">Create an account</a></p>
+</div>
+<%- include('partials/footer') %>

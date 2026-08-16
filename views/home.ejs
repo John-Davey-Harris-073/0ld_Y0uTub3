@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<div class="home-layout">
+  <div class="home-main">
+    <h2 class="section-title">Recently Added</h2>
+    <% if (recent.length === 0) { %>
+      <p class="empty-note">There are no videos yet. <a href="/upload">Upload the first one!</a></p>
+    <% } else { %>
+      <div class="video-grid">
+        <% recent.forEach(function (v) { %>
+          <%- include('partials/videoitem', { v: v }) %>
+        <% }) %>
+      </div>
+      <p class="more-link"><a href="/videos">See all videos &raquo;</a></p>
+    <% } %>
+  </div>
+  <aside class="home-side">
+    <h2 class="section-title">Most Viewed</h2>
+    <% popular.forEach(function (v, i) { %>
+      <div class="popular-row">
+        <span class="rank"><%= i + 1 %></span>
+        <div class="popular-info">
+          <a href="/watch/<%= v.id %>" class="popular-title"><%= v.title %></a>
+          <div class="video-item-chan"><a href="/channel/<%= v.username %>"><%= v.username %></a></div>
+        </div>
+      </div>
+    <% }) %>
+    <% if (popular.length === 0) { %>
+      <p class="empty-note">Nothing to show yet.</p>
+    <% } %>
+  </aside>
+</div>
+<%- include('partials/footer') %>

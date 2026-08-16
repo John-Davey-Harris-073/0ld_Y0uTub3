@@ -1,0 +1,109 @@
+<%- include('partials/header') %>
+<div class="watch-layout">
+  <div class="watch-main">
+    <div class="player">
+      <video controls preload="metadata" src="/uploads/<%= video.filename %>"></video>
+    </div>
+
+    <h1 class="watch-title"><%= video.title %></h1>
+
+    <div class="watch-meta">
+      <span class="views"><%= fmtViews(video.views) %> views</span>
+      <span class="dot">&middot;</span>
+      <span><%= fmtDate(video.created_at) %></span>
+      <% if (video.category) { %>
+        <span class="dot">&middot;</span>
+        <span class="category"><%= video.category %></span>
+      <% } %>
+    </div>
+
+    <div class="rating-row">
+      <form action="/videos/<%= video.id %>/like" method="post">
+        <input type="hidden" name="rating" value="1">
+        <button type="submit" class="rating-btn <%= myRating === 1 ? 'active' : '' %>">Like (<%= fmtViews(likeCounts['1']) %>)</button>
+      </form>
+      <form action="/videos/<%= video.id %>/like" method="post">
+        <input type="hidden" name="rating" value="-1">
+        <button type="submit" class="rating-btn <%= myRating === -1 ? 'active' : '' %>">Dislike (<%= fmtViews(likeCounts['-1']) %>)</button>
+      </form>
+      <% if (!user) { %>
+        <span class="rating-hint"><a href="/login">Sign in</a> to rate this video</span>
+      <% } %>
+    </div>
+
+    <% if (video.description) { %>
+      <div class="description-box">
+        <div class="description-author">
+          <a href="/channel/<%= video.username %>"><%= video.username %></a>
+        </div>
+        <p><%= video.description %></p>
+      </div>
+    <% } %>
+
+    <div id="comments" class="comments">
+      <h2 class="section-title">Comments (<%= fmtViews(commentCount) %>)</h2>
+      <% if (user) { %>
+        <form action="/videos/<%= video.id %>/comment" method="post" class="comment-form">
+          <textarea name="text" rows="3" placeholder="Share your thoughts..." required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+      <% } else { %>
+        <p class="empty-note"><a href="/login">Sign in</a> to post a comment.</p>
+      <% } %>
+      <% if (comments.length === 0) { %>
+        <p class="empty-note">No comments yet.</p>
+      <% } %>
+      <% comments.forEach(function (c) { %>
+        <div class="comment">
+          <div class="avatar"><%= c.username.charAt(0).toUpperCase() %></div>
+          <div class="comment-body">
+            <div class="comment-head">
+              <a href="/channel/<%= c.username %>" class="comment-user"><%= c.username %></a>
+              <span class="comment-date"><%= fmtRel(c.created_at) %></span>
+            </div>
+            <p class="comment-text"><%= c.text %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <aside class="watch-side">
+    <div class="side-box upload-box">
+      <div class="side-box-title">Upload Your Video</div>
+      <a href="/upload" class="red-btn">Upload Video</a>
+    </div>
+
+    <% if (moreFrom.length > 0) { %>
+      <div class="side-box">
+        <div class="side-box-title">More From: <a href="/channel/<%= video.username %>"><%= video.username %></a></div>
+        <% moreFrom.forEach(function (v) { %>
+          <div class="side-video">
+            <a href="/watch/<%= v.id %>"><img src="/thumbs/<%= v.id %>" alt="<%= v.title %>" width="120" height="90"></a>
+            <div class="side-video-info">
+              <a href="/watch/<%= v.id %>" class="side-video-title"><%= v.title %></a>
+              <div class="side-video-meta"><%= fmtViews(v.views) %> views</div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <div class="side-box">
+      <div class="side-box-title">Related Videos</div>
+      <% if (related.length === 0) { %>
+        <p class="empty-note">No related videos.</p>
+      <% } %>
+      <% related.forEach(function (v) { %>
+        <div class="side-video">
+          <a href="/watch/<%= v.id %>"><img src="/thumbs/<%= v.id %>" alt="<%= v.title %>" width="120" height="90"></a>
+          <div class="side-video-info">
+            <a href="/watch/<%= v.id %>" class="side-video-title"><%= v.title %></a>
+            <div class="side-video-meta"><%= fmtViews(v.views) %> views</div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </aside>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<h2 class="section-title">All Videos (<%= fmtViews(total) %>)</h2>
+<div class="sort-bar">
+  Sort by:
+  <a href="/videos?sort=date" class="<%= sort === 'date' ? 'sort-active' : '' %>">Date</a>
+  <a href="/videos?sort=views" class="<%= sort === 'views' ? 'sort-active' : '' %>">Views</a>
+  <a href="/videos?sort=channel" class="<%= sort === 'channel' ? 'sort-active' : '' %>">Channel</a>
+</div>
+<% if (videos.length === 0) { %>
+  <p class="empty-note">There are no videos yet.</p>
+<% } %>
+<% videos.forEach(function (v) { %>
+  <div class="search-row">
+    <a href="/watch/<%= v.id %>"><img src="/thumbs/<%= v.id %>" alt="<%= v.title %>" width="160" height="120"></a>
+    <div class="search-info">
+      <a href="/watch/<%= v.id %>" class="search-title"><%= v.title %></a>
+      <div class="search-sub">
+        <a href="/channel/<%= v.username %>"><%= v.username %></a>
+        <span class="gray">- <%= fmtViews(v.views) %> views - <%= fmtRel(v.created_at) %></span>
+      </div>
+    </div>
+  </div>
+<% }) %>
+<% if (pages > 1) { %>
+  <div class="pagination">
+    <% if (page > 1) { %>
+      <a href="/videos?sort=<%= sort %>&page=<%= page - 1 %>">&laquo; Previous</a>
+    <% } %>
+    <span class="page-num">Page <%= page %> of <%= pages %></span>
+    <% if (page < pages) { %>
+      <a href="/videos?sort=<%= sort %>&page=<%= page + 1 %>">Next &raquo;</a>
+    <% } %>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

@@ -1,0 +1,12 @@
+<div class="video-item">
+  <a href="/watch/<%= v.id %>">
+    <img src="/thumbs/<%= v.id %>" alt="<%= v.title %>" width="160" height="120">
+  </a>
+  <div class="video-item-title">
+    <a href="/watch/<%= v.id %>"><%= v.title %></a>
+  </div>
+  <div class="video-item-chan">
+    <a href="/channel/<%= v.username %>"><%= v.username %></a>
+  </div>
+  <div class="video-item-meta"><%= fmtViews(v.views) %> views - <%= fmtRel(v.created_at) %></div>
+</div>
