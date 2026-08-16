@@ -13,14 +13,8 @@ services:
         fromDatabase:
           name: 0ld-youtube-db
           property: connectionString
-      - key: UPLOAD_DIR
-        value: /var/data
       - key: MAX_FILE_MB
         value: "100"
-    disk:
-      name: uploads
-      mountPath: /var/data
-      sizeGB: 1
 
 databases:
   - name: 0ld-youtube-db
